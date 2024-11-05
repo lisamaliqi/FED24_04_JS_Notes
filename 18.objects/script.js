@@ -49,10 +49,24 @@ const barksby = {
     species: 'Dog',
     age: 5,
     sound: 'Woffff!',
-    hobbies: ['Tail-wagging', 'Eating lots of treats', 'Car-chasing'],
-    owner: {
+    hobbies: ['Tail-wagging', 'Eating lots of treats', 'Car-chasing'],//innehåller en array
+   ageCounter: 0,
+    owner: {//innehåller ett object
         name: 'Mr Bean',
         age: 57,
+    },
+    speak: function() {//innehåller en function
+        console.log(`Hello this is ${this.name}, i am ${barksby.age} years old`);
+        //jag kan här ändra barksby till this, det ger samma resultat
+
+        //lägg till +1 på ageCounter varje gång den körs
+        this.ageCounter++;
+        console.log(`Age went to: ${this.ageCounter}`);
+        
+    },
+    info: function () {
+        console.log(this);//this refererar oftast objektet som methoden finns på
+        //använd INTE arrow function 
     }
 }
 
@@ -62,3 +76,10 @@ console.log(barksby.owner.name);
 
 //hur jag får ut allt i en array tillsammans:
 console.log(barksby.hobbies.join(', '));//-->Tail-wagging, Eating lots of treats, Car-chasing
+
+//få ut funktionerna 
+barksby.speak();//-->Age went to: 1
+barksby.speak();//-->Age went to: 2
+barksby.speak();//-->Age went to: 3
+barksby.speak();//-->Age went to: 4
+barksby.info();
