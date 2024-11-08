@@ -141,3 +141,40 @@ pets.forEach((pet) => {
 
 
 
+
+////////////////////////////////////////////////////////////////////////
+//				JOHANS LÖSNING
+
+// Old-school 👴🏻
+// document.getElementById
+// document.getElementsByClassName
+// document.getElementsByTagName
+//
+// Modern 🤩
+// document.querySelector
+// document.querySelectorAll
+
+// Get a reference to the DOM-element with ID of `petslist`
+const petslistEl = document.querySelector("#petslist");
+
+// Loop over dem pets
+pets.forEach( (pet) => {
+	// let petOwnerName;
+	// if (pet.owner) {
+	// 	petOwnerName = pet.owner.name;
+	// } else {
+	// 	petOwnerName = "missing";
+	// }
+
+	//tenary, fungerar  på liknande sätt som if statement
+	const petOwnerName = pet.owner //om detta är sant
+		? pet.owner.name //gör det
+		: "missing"; //annars, gör det
+
+	petslistEl.innerHTML += `
+		<li>
+			${pet.name} is a ${pet.species} of ${pet.age} year(s) old. His owner is ${petOwnerName} and his favorite hobbies is to ${pet.hobbies.join(", ").toLowerCase()}.
+		</li>
+	`;
+} );
+
