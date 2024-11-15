@@ -139,6 +139,11 @@ const renderTodos = () => {
 const sortTodos = () => {
     //sort by title 
     todos.sort((a, b) => {
+        //detta sorterar rätt på å ä ö
+        return a.title.localeCompare(b.title, 'sv');
+
+/* 
+        //detta sorterar inte Ä rätt pga teckenkoding 
         if (a.title.toLowerCase() < b.title.toLowerCase()) {
             return -1;
         }
@@ -148,6 +153,9 @@ const sortTodos = () => {
         }
         //om de är samma, retunera 0
         return 0;
+         */
+
+        
     });
 };
 
