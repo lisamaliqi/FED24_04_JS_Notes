@@ -100,14 +100,31 @@ formCreateTodoEl.addEventListener("submit", (e) => {
 //listen for click-events on the todos list
 todolistEl.addEventListener('click', (e) => {
    
-   if (e.target.tagName === 'LI') {
-      console.log('you ckliced on titile: ', e.target.innerText);
+    if (e.target.tagName === 'LI') {
+        //user clicked on a list item
+        console.log('you clicked on titile: ', e.target.innerText);
 
-      todos.forEach((todo) => {
+        //helt ärligt jag fattar typ inte detta, måste gå igenom
+        const clickedTodoTitle = e.target.innerText;
+
+        //search todos for the todo with the matching title
+        const clickedTodo = todos.find((todo) => {
+            return (todo.title === clickedTodoTitle);         
+        });
+        console.log('result from find: ', clickedTodo);
+
+        
+        if (clickedTodo) {
+            clickedTodo.completed = true;
+        }
+        
+        
+
+     /*  todos.forEach((todo) => {
          if (todo.title === e.target.innerText) {
             todo.completed = true;
          };
-      });
+      }); */
 
       //re-render todos so the DOM reflects the current truth
       renderTodos();
@@ -155,7 +172,7 @@ const sortTodos = () => {
         return 0;
          */
 
-        
+
     });
 };
 
