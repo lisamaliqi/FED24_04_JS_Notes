@@ -113,10 +113,11 @@ todolistEl.addEventListener('click', (e) => {
         });
         console.log('result from find: ', clickedTodo);
 
+        //toggle between completed and not completed
+        //vad betyder ens detta?!?!?!?
+        clickedTodo.completed = !clickedTodo.completed;
         
-        if (clickedTodo) {
-            clickedTodo.completed = true;
-        }
+        
         
         
 
