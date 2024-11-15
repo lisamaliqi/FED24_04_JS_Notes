@@ -114,12 +114,8 @@ todolistEl.addEventListener('click', (e) => {
         console.log('result from find: ', clickedTodo);
 
         //toggle between completed and not completed
-        //vad betyder ens detta?!?!?!?
+        //om det är true gör det till falsey, om det är false, gör det till truthy
         clickedTodo.completed = !clickedTodo.completed;
-        
-        
-        
-        
 
      /*  todos.forEach((todo) => {
          if (todo.title === e.target.innerText) {
