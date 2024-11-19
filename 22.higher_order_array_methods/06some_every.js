@@ -1,18 +1,59 @@
-//Array.every()
-//kollar ifall ALLA items i en array stämmer det man efterfrågar
+/**
+ * Higher Order Array Methods
+ *
+ * .sort()
+ * .filter()
+ * .find()
+ * .map()
+ * .reduce()
+ *
+ * .every() <--
+ * .some() <--
+ */
 
-const everyonePassed = students.every((student) => {
-    return student >= 40;
+const students = [
+	{
+		name: "Johan",
+		points: 1337,
+	},
+	{
+		name: "Pernilla",
+		points: -3,
+	},
+	{
+		name: "Alicia",
+		points: 88,
+	},
+	{
+		name: "Maja",
+		points: 35,
+	},
+	{
+		name: "Elliot",
+		points: 42,
+	},
+];
+
+/**
+ * Array.every()
+ *
+ * Checks if **every** item in the array passes the condition
+ */
+
+// Are all students godkända?
+const are_all_students_godkanda = students.every((student) => {
+	return student.points >= 40;
 });
-console.log(everyonePassed);
+console.log("Are all students godkända?", are_all_students_godkanda);
 
+/**
+ * Array.some()
+ *
+ * Checks if **some** items in the array passes the condition
+ */
 
-//array.some()
-//kollar ifall 1 eller fler items i en array stämmer det man efterfrågar
-const somePassed = students.some((student) => {
-    return student >= 40;
+// Are some students godkända?
+const are_some_students_godkanda = students.some((student) => {
+	return student.points >= 40;
 });
-console.log(somePassed);
-
-
-///ta ut johans notes i detta!
+console.log("Are some students godkända?", are_some_students_godkanda);
