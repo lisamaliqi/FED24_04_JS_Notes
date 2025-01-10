@@ -64,7 +64,9 @@ formGuessEl.addEventListener("submit", (e) => {
 	//if-statement för att se ifall correctNumber stämmer överens med det man gissat
 	if (guessedNumber === correctNumber) {
         turnoutEl.innerText = `You guessed the correct number! The number was ${correctNumber}`;
-	} else {
-        turnoutEl.innerText = `You are WRONG!!! Guess again idiot!`;
-	}
+	} else if (guessedNumber < correctNumber) {
+        turnoutEl.innerText = `Too low, guess again!`;
+	} else if (guessedNumber > correctNumber) {
+        turnoutEl.innerText = `Too high, guess again...`;
+    }
 });
