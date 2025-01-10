@@ -80,3 +80,17 @@ formGuessEl.addEventListener("submit", (e) => {
         turnoutEl.innerText = `Too high, guess again...`;
     }
 });
+
+// skapa en till eventlistener som gör en reset när man trycker på röda knappen
+formGuessEl.addEventListener("reset", () => {
+	// ge correctNumber ett nytt värde genom att köra randomnumber funktionen
+	correctNumber = getRandomNumber();
+	// antal attampts ska tillbaks till 0
+	attempts = 0;
+	// uppdatera dom med antal gissningar (aka 0)
+	guessesEl.innerText = `${attempts} guesses`;
+	// uppdatera det nya korrekta numret i diven
+	cheatEl.innerText = correctNumber;
+	// töm delen som visar ifall man har rätt eller fel
+	turnoutEl.innerText = "";
+});
