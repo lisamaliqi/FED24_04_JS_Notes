@@ -63,8 +63,8 @@ formGuessEl.addEventListener("submit", (e) => {
 	const guessedNumber = Number(inputGuessEl.value);
 	//if-statement för att se ifall correctNumber stämmer överens med det man gissat
 	if (guessedNumber === correctNumber) {
-		alert("OMG YAS");
+        turnoutEl.innerText = `You guessed the correct number! The number was ${correctNumber}`;
 	} else {
-		alert("Skräddaren säger NEJ, det blir ett bestämt NEJ!");
+        turnoutEl.innerText = `You are WRONG!!! Guess again idiot!`;
 	}
 });
