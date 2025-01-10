@@ -58,6 +58,9 @@ guessesEl.innerText = `${attempts} guesses`;
 // det korrekta nummret för omgången kommer synas i denna diven 
 cheatEl.innerText = correctNumber;
 
+//lägger till så att det skapar fokus på input-fäletet (så användaren vet vart den ska)
+inputGuessEl.focus();
+
 //skapa en eventlistener för där man ska skriva in sitt nummer
 formGuessEl.addEventListener("submit", (e) => {
     //kör preventDefault på submit fältet, alltså att sidan inte laddas om
@@ -79,6 +82,11 @@ formGuessEl.addEventListener("submit", (e) => {
 	} else if (guessedNumber > correctNumber) {
         turnoutEl.innerText = `Too high, guess again...`;
     }
+
+    // Rensa det man gissat i inputfäletet efter varje gissnign
+	inputGuessEl.value = "";
+	// skapa fokus på input-fältet igen
+	inputGuessEl.focus();
 });
 
 // skapa en till eventlistener som gör en reset när man trycker på röda knappen
@@ -93,4 +101,6 @@ formGuessEl.addEventListener("reset", () => {
 	cheatEl.innerText = correctNumber;
 	// töm delen som visar ifall man har rätt eller fel
 	turnoutEl.innerText = "";
+    // fokus på input-fältet
+	inputGuessEl.focus();
 });
