@@ -52,15 +52,25 @@ let attempts;
 correctNumber = getRandomNumber(); 
 //ge attempts värdet 0 från start 
 attempts = 0;
-// det korrekta nummret för omgången kommer synas i denna diven (som är osynlig för användaren)
+//uppdatera DOM hur många gissningar man har gjort (börjar med 0)
+guessesEl.innerText = `${attempts} guesses`;
+
+// det korrekta nummret för omgången kommer synas i denna diven 
 cheatEl.innerText = correctNumber;
 
 //skapa en eventlistener för där man ska skriva in sitt nummer
 formGuessEl.addEventListener("submit", (e) => {
     //kör preventDefault på submit fältet, alltså att sidan inte laddas om
 	e.preventDefault();
+
     //gör om värdet av det man skriver i input-fältet till ett nummer, sedan ge det till variabeln guessedNumber
 	const guessedNumber = Number(inputGuessEl.value);
+
+    // För varje gång man submitar så ska attempts öka med +1
+	attempts++;
+	// uppdatera sedan det nya värdet av attemplts i DOM
+	guessesEl.innerText = `${attempts} guesses`;
+
 	//if-statement för att se ifall correctNumber stämmer överens med det man gissat
 	if (guessedNumber === correctNumber) {
         turnoutEl.innerText = `You guessed the correct number! The number was ${correctNumber}`;
