@@ -77,6 +77,8 @@ formGuessEl.addEventListener("submit", (e) => {
 	//if-statement för att se ifall correctNumber stämmer överens med det man gissat
 	if (guessedNumber === correctNumber) {
         turnoutEl.innerText = `You guessed the correct number! The number was ${correctNumber}`;
+        // gör knappen disabled så att användaren inte kan gissa mer efter den gissat rätt, utan måste börja om
+		btnGetLuckyEl.setAttribute("disabled", "disabled");
 	} else if (guessedNumber < correctNumber) {
         turnoutEl.innerText = `Too low, guess again!`;
 	} else if (guessedNumber > correctNumber) {
@@ -103,4 +105,6 @@ formGuessEl.addEventListener("reset", () => {
 	turnoutEl.innerText = "";
     // fokus på input-fältet
 	inputGuessEl.focus();
+    // gör knappen tillgänglig igen efter man tryckt på restart
+	btnGetLuckyEl.removeAttribute("disabled");
 });
