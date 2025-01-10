@@ -1,6 +1,6 @@
-#Hur man laddar ner olika saker:
+# Hur man laddar ner olika saker:
 
-##Vite
+## Vite
 Gå in i den mappen du vill lägga in din vite app i, ex: jag har en mapp som heter vite_playground. Jag ställer mig i vite_playground i min terminal och sedan skriver jag:
 
 $ npm create vite@latest DITT-NAMN-PÅ-FILEN --template vanilla-ts
