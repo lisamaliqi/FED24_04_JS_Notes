@@ -79,5 +79,34 @@ getJSON('data/pets.json', (err, petCategories) => {
             .join('');
         });
     });
-
 });
+
+ 
+
+//exempel på callback hell (aka javascirpt triangle of doom)
+/*
+// Get cattos 🐱
+getJSON("data/cats.json", (err, cats) => {
+	// Got cats!
+	console.log("Got list of cats:", cats);
+	// Get doggos 🐶
+	getJSON("data/dogs.json", (err, dogs) => {
+		// Got woofs!
+		console.log("Got list of tail-waggers:", dogs);
+		// Get flying projectiles 🦜🚀
+		getJSON("data/birds.json", (err, birds) => {
+			// Got woofs!
+			console.log("Got list of flying projectiles:", birds);
+		});
+	});
+});
+
+// Callback Hell (a.k.a. JavaScript Triangle of Doom)
+getJSON("data/cats.json", (err, cats) => {
+	getJSON("data/dogs.json", (err, dogs) => {
+		getJSON("data/birds.json", (err, birds) => {
+			console.log("😰");
+		});
+	});
+});
+*/

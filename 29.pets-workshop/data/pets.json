@@ -8,6 +8,11 @@
       "id": "dogs",
       "title": "Dogs",
       "url": "data/dogs.json"
+    },
+    {
+      "id": "birds",
+      "title": "Birds",
+      "url": "data/birds.json"
     }
   ]
   
