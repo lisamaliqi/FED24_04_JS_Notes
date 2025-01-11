@@ -5,6 +5,19 @@
  * _THEN_ send a request to each `url` in the response
  *
  * For each response, output it's data to the corresponding list
+ * 
+ *
+ * MINI-WORKSHOP
+ *
+ * STEG 1
+ * Hämta `data/pets.json` och därefter för varje objekt i svaret
+ * så hämta den URL som finns i objektet. Skriv ut svaret till console.
+ *
+ * STEG 2
+ * Ändra koden från steg 1 så att du skriver ut informationen om varje
+ * husdjur till varsin egen UL i DOM (det finns redan UL-element) för
+ * de olika kategorierna av husdjur.
+ *
  */
 
 // Skapa en funktion somhämtar data från en url samt har en callback i sig
@@ -37,3 +50,34 @@ const getJSON = (url, callback) => {
 
 	console.log("Request sent to:", url);
 }
+
+//kalla på funktionen med två värden i callback delen 
+getJSON('data/pets.json', (err, petCategories) => {
+    //om error är true, skicka detta meddelandet!
+    if(err) {
+        alert('something went wrong, ERROR!')
+        return;
+    }
+    //logga ut vad för data petcategories innehåller
+    console.log('the data for step 1 is: ', petCategories);
+    
+    //pga ändrat json till javascript med parse så kan jag göra forEach för varje objekt i arrayen
+    petCategories.forEach((petCategory) => {
+        console.log('one category at a time: ', petCategory);
+        
+        //kör funktionen getJSON igen för att ta ut url i varje petCategory
+        //tar ut url från petcategory samt lägger in infor för callback funktionen (err och pets)
+        getJSON(petCategory.url, (err, pets) => {
+            //tar ut datan från vad som finns i varje pets json fil
+            console.log(`got me some ${petCategory.title}: `, petCategory, pets);
+
+            //gör en output på detta i DOM
+            //säger att det är id + tar ut namnet på id som stämmer med html id-namn (slipper skriva flera gånger manuelt)
+            //mapar (alltså går igenom varje pet och retunerar ut det som står)
+            document.querySelector('#' + petCategory.id).innerHTML = pets
+            .map((pet) => `<li>${pet.name} (${pet.age} years old)</li>`)
+            .join('');
+        });
+    });
+
+});
