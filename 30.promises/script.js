@@ -3,6 +3,23 @@
  *
  */
 
+//skapar en ny variabel som är en promise med callback funktion
+//en promis delar ut två värden, antingen resolve eller reject
+const promiseOfFutureData = new Promise( (resolve, reject) => {
+    //efter tre sek så kommer koden antingen resolve eller reject
+	setTimeout(() => {
+		resolve("i strong, i halp!");
+		// reject("nä jag känner mej litta förkyld");
+	}, 3000);
+} );
+console.log("Waiting for promise result...", promiseOfFutureData);
+
+//pga variabeln är inte en metod/funktion så ska det inte vara () efter namnet
+//.then ifall data är true, .catch ifall err är true
+//såhär kallar du på den:
+promiseOfFutureData
+	.then(data => console.log("Yay promise was kept:", data))
+	.catch(err => console.log("Promise was broken 🥺. Reason:", err));
 
 
 // Skapa en funktion somhämtar data från en url samt har en callback i sig
