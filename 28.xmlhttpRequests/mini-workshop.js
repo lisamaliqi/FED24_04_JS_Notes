@@ -44,35 +44,43 @@ const getJSON = (url, callback) => {
 
 	// Send the request
 	request.send();
+
+	console.log("Request sent to:", url);
 }
 
-// Get users plz
-getJSON("https://jsonplaceholder.typicode.com/users", (err, data) => {
+// FIRST get users
+getJSON("https://jsonplaceholder.typicode.com/users", (err, users) => {
 	if (err) {
 		// Something went wrong 😢
 		alert(err);
 		return;
 	}
 
+	console.log("Got me some users", users);
+
 	// Quickly transform the array of object into listitems and output it to DOM
-	document.querySelector("#users").innerHTML = data
+	document.querySelector("#users").innerHTML = users
 		.map((user) => `<li>${user.name} (${user.email})</li>`)
 		.join("");
-} );
 
-// Get posts plz
-getJSON("https://jsonplaceholder.typicode.com/posts", (err, data) => {
-	if (err) {
-		// Something went wrong 😢
-		alert(err);
-		return;
-	}
+	// THEN get posts
+	getJSON("https://jsonplaceholder.typicode.com/posts", (err, posts) => {
+		if (err) {
+			// Something went wrong 😢
+			alert(err);
+			return;
+		}
 
-	// Quickly transform the array of object into listitems and output it to DOM
-	document.querySelector("#posts").innerHTML = data
-		.map((post) => `<li>${post.title}</li>`)
-		.join("");
+		console.log("Got me some posts, posts is:", posts);
+		console.log("Got me some posts, users is:", users);
+
+		// Output post title along with the author's name
+		document.querySelector("#posts").innerHTML = posts
+			.map((post) => `<li>${post.title} <em>by ${users.find(user => user.id === post.userId).name}</em></li>`)
+			.join("");
+	} );
+
 } );
 
 // Done (?)
-console.log("Request sent!");
+console.log("All requests sent!");
