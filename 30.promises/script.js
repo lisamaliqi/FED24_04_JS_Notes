@@ -73,6 +73,7 @@ console.log("promiseOfDogs:", promiseOfDogs);
 // console.log("promiseOfSnakes:", promiseOfSnakes);
 
 
+//hade man gjort båda snakes och dogs så hade de skickats samtidigt
 // Dogs 🐶
 getJSON("data/dogs.json")
 	.then(dogs => console.log("Yay dogs 🐶:", dogs))
@@ -85,3 +86,27 @@ getJSON("data/snakes.json")
 	.then(snakes => console.log("Omg snakes 🐍:", snakes))
 	.catch(err => console.log("No snakes 😢:", err));
      */
+
+
+//hur man skickar det efter varandra (aka först katter, sen hundar, sen fåglar):
+//istället för att skriva getJSON i en triangel så kan man istället retunera getJSON
+//där retunerar vi alltså en new promise i varje then()
+getJSON("data/cats.json")
+	.then((cats) => {
+		console.log("Got mjaus:", cats);
+		return getJSON("data/dogs.json");
+	})
+	.then((dogs) => {
+		console.log("Got woofs:", dogs);
+		console.log("Cats?", cats);
+		console.log("Birds?", birds);
+		return getJSON("data/birds.json");
+	})
+	.then((birds) => {
+		console.log("Got flying things:", birds);
+		console.log("Cats?", cats);
+		console.log("Dogs?", dogs);
+	})
+	.catch((err) => {
+		console.log("🚨 Something bad happened:", err);
+	});
