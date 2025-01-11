@@ -88,6 +88,10 @@ getJSON("data/snakes.json")
      */
 
 
+/*
+
+            SKICKA EN EFTER VARANDRA 
+
 //hur man skickar det efter varandra (aka först katter, sen hundar, sen fåglar):
 //istället för att skriva getJSON i en triangel så kan man istället retunera getJSON
 //där retunerar vi alltså en new promise i varje then()
@@ -98,15 +102,35 @@ getJSON("data/cats.json")
 	})
 	.then((dogs) => {
 		console.log("Got woofs:", dogs);
-		console.log("Cats?", cats);
-		console.log("Birds?", birds);
+		// console.log("Cats?", cats);
+		// console.log("Birds?", birds);
 		return getJSON("data/birds.json");
 	})
 	.then((birds) => {
 		console.log("Got flying things:", birds);
-		console.log("Cats?", cats);
-		console.log("Dogs?", dogs);
+		// console.log("Cats?", cats);
+		// console.log("Dogs?", dogs);
 	})
 	.catch((err) => {
 		console.log("🚨 Something bad happened:", err);
 	});
+*/
+
+
+//Kalla funktionen som först hämtar pets JSON och SEN hämtar varje pets kategori parallelt
+getJSON("data/pets.json")
+	.then((petCategories) => {
+		petCategories.forEach((petCategory) => {
+			getJSON(petCategory.url)
+				.then((pets) => {
+					console.log(`Got ${petCategory.id}:`, pets);
+				})
+				.catch((err) => {
+					console.log("🚨 Something bad happened:", err);
+				});
+		});
+	})
+	.catch((err) => {
+		console.log("🚨 Something bad happened:", err);
+	});
+
