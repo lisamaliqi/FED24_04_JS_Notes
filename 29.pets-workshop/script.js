@@ -28,7 +28,7 @@ const getJSON = (url, callback) => {
 	// requesten ska GET datan från url
 	request.open("GET", url);
 
-	// eventlistener för varhe readystatechange
+	// eventlistener för varje readystatechange
 	request.addEventListener("readystatechange", () => {
 		//är requesten klar samt status på 200 (aka success)?
 		if (request.readyState === 4) {
