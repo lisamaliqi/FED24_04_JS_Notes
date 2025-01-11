@@ -14,5 +14,29 @@ fetch("data/dogs.json")
 		return res.json();
 	})
     //logga ut datan från dogs
-	.then(data => console.log("data:", data))
+	.then((data) => {
+        //logga ut datan samt skicka in data i DOM
+        console.log("dogs:", data);
+        document.querySelector('#dogs').innerHTML = data
+            .map(dog => `<li>${dog.name}</li>`)
+            .join('');
+    })
 	.catch(err => console.log("🚨 Something went wrong:", err));
+
+// Gör samma för katter:
+fetch("data/cats.json")
+	.then((res) => {
+		if (!res.ok) {
+			throw new Error("Request was not successful!");
+		}
+		return res.json();
+	})
+	.then((data) => {
+        console.log("cats:", data);
+		document.querySelector("#cats").innerHTML = data
+			.map(cat => `<li>${cat.name}</li>`)
+			.join("");
+	})
+	.catch(err => console.log("🚨 Something went wrong:", err));
+
+           
