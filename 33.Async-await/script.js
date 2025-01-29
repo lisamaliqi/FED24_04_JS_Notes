@@ -113,11 +113,38 @@ getData5("data/cats.json")
 
 
 const getPets = async () => {
-	const cats = await getData5("data/cats.json");
-	console.log("cats in getPets:", cats);
+	// const cats = await getData5("data/cats.json");
+	// console.log("cats in getPets:", cats);
 
-	const dogs = await getData5("data/dogs.json");
-	console.log("dogs:", dogs);
+    //detta istället för det där över
+    try {
+        //hämta ut arrayen med cats.json
+		const catArray = await getData5("data/cats.json");
+		console.log("got me some kittehs:", catArray);
+
+        //skicka in det i DOM
+		document.querySelector("#cats").innerHTML = catArray
+			.map(cat => `<li>${cat.name}</li>`)
+			.join("");
+            
+        
+    // const dogs = await getData5("data/dogs.json");
+    // console.log("dogs:", dogs);
+            
+            //detta istället för det där över
+        //hämta ut arrayen med dogs.json
+        const dogArray = await getData5("data/dogs.json");
+        console.log("got me some pupps:", dogArray);
+
+        //skicka in det i DOM
+        document.querySelector("#dogs").innerHTML = dogArray
+                .map(dog => `<li>${dog.name}</li>`)
+                .join("");
+
+    //ifall man fångar upp ett error, logga detta
+	} catch (err) {
+		console.log("🚨 Caught cats error:", err);
+	}
 
     // const birds = await getData("data/birds.json");
 	// console.log("birds:", birds);
