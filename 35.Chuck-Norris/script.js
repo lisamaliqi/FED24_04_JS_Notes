@@ -19,6 +19,7 @@ const chuckAPI = 'https://api.chucknorris.io/jokes/random';
 
 const paraEl = document.querySelector('#joke');
 const jokeBtnEl = document.querySelector('#jokeBtn');
+const errorTextEl = document.querySelector('#errorText');
 
 
 const fetchChuch = () => {
@@ -36,6 +37,8 @@ const fetchChuch = () => {
     })
     .catch ((err) => {
         console.log('failed to get get joke because: ', err);
+        errorTextEl.classList.remove('hide');
+        errorTextEl.innerText = err;
     });
 };
 
