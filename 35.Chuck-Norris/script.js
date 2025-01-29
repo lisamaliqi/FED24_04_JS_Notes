@@ -23,18 +23,18 @@ const errorTextEl = document.querySelector('#errorText');
 
 
 const fetchChuch = () => {
-    return fetch(chuckAPI)
+    fetch(chuckAPI)
     .then((res) => {
         if (!res.ok) {
             throw new Error("Could not find the joke :(");
         }
         return res.json();
     }) 
+    
     .then((joke) => {
-        console.log(joke.value);
-        
         paraEl.innerText = joke.value;
     })
+
     .catch ((err) => {
         console.log('failed to get get joke because: ', err);
         errorTextEl.classList.remove('hide');
@@ -42,9 +42,35 @@ const fetchChuch = () => {
     });
 };
 
+
+// Johans version av koden aka lite bättre med async await och try catch
+const getChuckNorrisFact = async () => {
+	try {
+		// Fetch URL and wait for promise to resolve
+		const res = await fetch(chuckAPI);
+
+		// Check if the received response wasn't a successful response
+		if (!res.ok) {
+			throw new Error("Chuck Norris is unavailable to take your call right now");
+		}
+
+		// Convert response from JSON to a JavaScript value and wait for it to resolve
+		const fact = await res.json();
+
+		// We got ze data, output it to DOM
+		paraEl.innerText = fact.value;
+
+	} catch (err) {
+		errorTextEl.innerText = "You don't summon Chuck Norris, Chuck Norris summons you! " + err;
+
+	};
+};
+
+
+
 //kalla funktionen varje gång man klickar på knappen jokeBtn
 jokeBtnEl.addEventListener('click', () => {
-    fetchChuch();
+    getChuckNorrisFact();
 });
 
 //kalla funktionen så ett skämt kommer upp när man laddar om sidan
