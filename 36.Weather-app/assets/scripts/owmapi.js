@@ -7,6 +7,7 @@
 //hämta api-key som jag själv genererat i openweathermap 
 const API_KEY = "a2dcea2a4c82329c40bdaf0ef20c66f3";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
+const FAKE_DELAY = 3000;
 
 
 /**
@@ -22,6 +23,9 @@ const getCurrentWeather = async (city) => {
 	if (!response.ok) {
 		throw new Error(`${response.status} ${response.statusText}`);   // "404 Not Found"
 	}
+
+    // Fakea en långsam API
+	!!FAKE_DELAY && await new Promise(r => setTimeout(r, FAKE_DELAY));
 
     // Konvertera responsens body från json
 	const data = await response.json();
