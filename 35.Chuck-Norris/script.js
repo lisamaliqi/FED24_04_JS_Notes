@@ -13,3 +13,24 @@
  * STEG 3
  * Lägg in felhantering för om hämtningen av ett slumpmässigt faktum misslyckas (av någon anledning). Visa felmeddelandet på sidan (i DOM).
  */
+
+
+const chuckAPI = 'https://api.chucknorris.io/jokes/random';
+
+const paraEl = document.querySelector('#joke');
+
+fetch(chuckAPI)
+    .then((res) => {
+        if (!res.ok) {
+            throw new Error("Could not find the joke :(");
+        }
+        return res.json();
+    }) 
+    .then((joke) => {
+        console.log(joke.value);
+        
+        paraEl.innerText = joke.value;
+    })
+    .catch ((err) => {
+        console.log('failed to get get joke because: ', err);
+    });
