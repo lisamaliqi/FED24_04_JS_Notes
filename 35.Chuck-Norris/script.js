@@ -18,8 +18,11 @@
 const chuckAPI = 'https://api.chucknorris.io/jokes/random';
 
 const paraEl = document.querySelector('#joke');
+const jokeBtnEl = document.querySelector('#jokeBtn');
 
-fetch(chuckAPI)
+
+const fetchChuch = () => {
+    return fetch(chuckAPI)
     .then((res) => {
         if (!res.ok) {
             throw new Error("Could not find the joke :(");
@@ -34,3 +37,12 @@ fetch(chuckAPI)
     .catch ((err) => {
         console.log('failed to get get joke because: ', err);
     });
+};
+
+//kalla funktionen varje gång man klickar på knappen jokeBtn
+jokeBtnEl.addEventListener('click', () => {
+    fetchChuch();
+});
+
+//kalla funktionen så ett skämt kommer upp när man laddar om sidan
+fetchChuch();
