@@ -5,6 +5,7 @@ h1, h2, h3, h4, h5, h6 {
 	min-height: 100vh;
 	text-align: center;
 }
+
 #app,
 #cat-wrapper {
 	align-content: center;
@@ -12,8 +13,18 @@ h1, h2, h3, h4, h5, h6 {
 	flex-direction: column;
 	justify-content: center;
 }
+
 #cat-button,
 #cat-image {
 	align-self: center;
 	margin-bottom: 2rem;
+}
+
+#loading-spinner {
+	position: fixed;
+	right: 1rem;
+	top: 1rem;
+}
+.hide {
+	display: none;
 }
