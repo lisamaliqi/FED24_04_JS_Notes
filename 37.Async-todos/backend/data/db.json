@@ -19,6 +19,21 @@
         "id": 4,
         "title": "Profit 💰",
         "completed": false
+      },
+      {
+        "title": "Buy bread",
+        "completed": false,
+        "id": 5
+      },
+      {
+        "title": "Drink covfefe ☕️",
+        "completed": false,
+        "id": 6
+      },
+      {
+        "title": "Drink moar COFFEE ☕️",
+        "completed": false,
+        "id": 7
       }
     ]
   }

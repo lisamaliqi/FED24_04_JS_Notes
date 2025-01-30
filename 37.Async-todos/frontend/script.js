@@ -20,6 +20,7 @@ const inputNewTodoTitleEl = document.querySelector("#inputNewTodoTitle");
 
 // List of todos
 let todos = [];
+
 /**
  * Fetch all todos from the API and return them
  *
@@ -101,7 +102,7 @@ const sortTodos = () => {
 
 
 // Listen for submit-events on the form
-formCreateTodoEl.addEventListener("submit", (e) => {
+formCreateTodoEl.addEventListener("submit", async (e) => {
 	// Stop form from being submitted to the server and causing a page reload
 	e.preventDefault();
 
@@ -114,6 +115,7 @@ formCreateTodoEl.addEventListener("submit", (e) => {
 		return false;
 	};
 
+/* 
 	// Find the higest ID for a todo using reduce
 	const maxId = todos.reduce((maxId, todo) => {
 		if (todo.id > maxId) {
@@ -121,19 +123,42 @@ formCreateTodoEl.addEventListener("submit", (e) => {
 		}
 		return maxId;
 	}, 0);
+	 */
 
 	// Create a new todo-object
 	const newTodo = {
-		id: maxId + 1,
+		// id: maxId + 1,
 		title: newTodoTitle,
 		completed: false,
 	};
 
-	// Add it to the todos-array
-	todos.push(newTodo);
 
-	// Render a representation of the updated todos-array
-	renderTodos();
+	// // Add it to the todos-array
+	// todos.push(newTodo);
+
+
+	// PPOST todo som användare skickar in till API
+	const res = await fetch("http://localhost:3001/todos", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(newTodo),
+	});
+
+	// Kolla så att allt gick okej
+	if (!res.ok) {
+		alert("Could not create todo! 🥺");
+		console.log("Could not create todo:", res);
+		return;
+	};
+
+	// // Render a representation of the updated todos-array
+	// renderTodos();
+
+
+	// Få den uppdaterade listan av todos
+	getAndRenderTodos();
 
 	// Finally, clear the input-field
 	inputNewTodoTitleEl.value = "";
