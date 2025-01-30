@@ -1,5 +1,14 @@
 /**
- * Better Todos
+* Async Todos
+ *
+ * STEG 1.
+ * Skriv funktionen `fetchTodos()` som gör en GET-request till
+ * `http://localhost:3001/todos`, översätter från JSON till JavaScript-array
+ * och returnerar den.
+ *
+ * STEG 2.
+ * Skriv funktionen `getAndRenderTodos()` som kallar på `fetchTodos()`, väntar på den
+ * och tar datan och skriver över `todos`. Därefter kallar den på `renderTodos()`.
  *
  */
 // Get references to DOM elements
@@ -10,23 +19,39 @@ const inputNewTodoTitleEl = document.querySelector("#inputNewTodoTitle");
 
 
 // List of todos
-let todos = [
-	{
-		id: 1,
-		title: "Learn basic JavaScript",
-		completed: true,
-	},
-	{
-		id: 2,
-		title: "Learn Array Methods",
-		completed: false,
-	},
-	{
-		id: 3,
-		title: "Take over the world",
-		completed: false,
-	},
-];
+let todos = [];
+/**
+ * Fetch all todos from the API and return them
+ *
+ */
+const fetchTodos = async () => {
+	//fetcha (GET-request) den http addressen
+	const res = await fetch('http://localhost:3001/todos');
+
+	//om responsen inte är okej, skicka error och varför det ej va ok
+	if (!res.ok) {
+		throw new Error(`Response was not OK. Status: ${res.status} ${res.statusText}`);
+	};
+
+	//konvertera res från json format till ett javascript objekt och ger data det värdet 
+	const data = await res.json();
+	return data;
+};
+
+/**
+ * Invokes `fetchTodos`, updates our local copy `todos` and then
+ * invokes `renderTodos`
+ */
+const getAndRenderTodos = async () => {
+	// kalla på fetchTodos() för att GET todos från API 
+	const fetchedTodos = await fetchTodos();
+
+	// uppdatera din tomma lokala array av todos med de todos som har fetchats från api
+	todos = fetchedTodos;
+
+	// Kalla renderTodos() för att rendera ut dom
+	renderTodos();
+}
 
 
 // Render a representation of the todos-array to the DOM
@@ -161,4 +186,4 @@ document.querySelectorAll("ul.todos").forEach((listEl) => {
 
 
 // Render the initial representation of the todos-array
-renderTodos();
+getAndRenderTodos();
