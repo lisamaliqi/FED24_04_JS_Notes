@@ -34,9 +34,15 @@ const renderCurrentWeather = (data) => {
 		return `<li><img src="http://openweathermap.org/img/wn/${condition.icon}@2x.png" alt="${condition.main}" title="${condition.description}"></li>`;
 	});
 
+    //Ta reda på ifall det är dag eller natt när vädret senast uppdaterades
+    //om det är efter sunrise och innan sunset = daytime, annars nighttime
+	const banner = (data.dt > data.sys.sunrise && data.dt < data.sys.sunset)
+    ? "assets/images/day.svg"
+    : "assets/images/night.svg";
+
 	// Skicka ut forecast till DOM
 	forecastEl.innerHTML = `
-		<img src="assets/images/forecast-banner.png" class="card-img-top">
+		<img src="${banner}" class="card-img-top">
 		<div class="card-body">
 			<h5 class="card-title" id="location">
 				<span id="city">${data.name}</span>,
