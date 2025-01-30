@@ -13,7 +13,7 @@ const spinnerEl = document.querySelector("#spinner");
  * @param data
  */
 const renderCurrentWeather = (data) => {
-	document.querySelector("#forecast").innerHTML = `
+	forecastEl.innerHTML = `
 		<img src="assets/images/forecast-banner.png" class="card-img-top">
 		<div class="card-body">
 			<h5 class="card-title" id="location">
@@ -34,7 +34,7 @@ const renderCurrentWeather = (data) => {
 			</p>
 		</div>
 	`;
-}
+};
 
 
 // Lyssna efter när användaren skickar submit på en stad den vill kolla vädret för
@@ -49,6 +49,10 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
     // console.log('e.target: ', e.target);
     // console.log('e.target.query: ', e.target.query);
     // console.log('e.target.query.value: ', e.target.query.value);
+
+    // Hide any previous current weather conditions
+    // Göm tidigare väder som visats genom att lägga till hide klassen
+	forecastEl.classList.add("hide");
     
     // Hämta ut innehållet som användaren skriver i formen 
 	const city = e.target.query.value.trim();
@@ -67,6 +71,9 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 
         // Kalla funktionen som renderar ut datan i DOM
 		renderCurrentWeather(data);
+
+        //ta bort hide klassen så att det som renderas syns 
+        forecastEl.classList.remove("hide");
 
 	} catch (err) {
 		// TODO: Replace this with a proper Bootstrap Alert component

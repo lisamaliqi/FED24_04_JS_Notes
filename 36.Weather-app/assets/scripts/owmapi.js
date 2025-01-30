@@ -7,7 +7,7 @@
 //hämta api-key som jag själv genererat i openweathermap 
 const API_KEY = "a2dcea2a4c82329c40bdaf0ef20c66f3";
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
-const FAKE_DELAY = 3000;
+const FAKE_DELAY = 1000;
 
 
 /**
