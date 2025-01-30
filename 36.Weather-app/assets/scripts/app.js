@@ -40,9 +40,15 @@ const renderCurrentWeather = (data) => {
     ? "assets/images/day.svg"
     : "assets/images/night.svg";
 
+
+    // Visa när vädret uppdaterades senast 
+	const freshness = new Date(data.dt * 1000);
+
+
 	// Skicka ut forecast till DOM
 	forecastEl.innerHTML = `
 		<img src="${banner}" class="card-img-top">
+        
 		<div class="card-body">
 			<h5 class="card-title" id="location">
 				<span id="city">${data.name}</span>,
@@ -60,9 +66,12 @@ const renderCurrentWeather = (data) => {
 				<span id="windspeed">${data.wind.speed}</span>
 				m/s
 			</p>
+
             <ul class="conditions">
 				${weatherConditions.join("")}
 			</ul>
+
+            <p id="freshness" class="small">${freshness.toLocaleString("sv-SE")}</p>
 		</div>
 	`;
 };
