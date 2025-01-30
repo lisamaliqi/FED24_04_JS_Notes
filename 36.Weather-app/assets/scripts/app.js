@@ -50,16 +50,20 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
     // console.log('e.target.query: ', e.target.query);
     // console.log('e.target.query.value: ', e.target.query.value);
 
-    // Hide any previous current weather conditions
     // Göm tidigare väder som visats genom att lägga till hide klassen
 	forecastEl.classList.add("hide");
+    // Göm alert diven så att den inte syns från start, utan syns endast när det blir något fel
+    alertEl.className = "hide";
     
     // Hämta ut innehållet som användaren skriver i formen 
 	const city = e.target.query.value.trim();
 
 	if (city.length < 3) {
-		// TODO: Replace this with a proper Bootstrap Alert component
-		alert("Too few characters in city, at least 3 is required!")
+		// alert("Too few characters in city, at least 3 is required!")
+
+        //skriv i DOM att man ska skriva mer än 3 bokstäver
+        alertEl.innerText = "Please enter at least 3 characters";
+		alertEl.className = "alert alert-info";
 		return;
 	};
 
@@ -76,7 +80,10 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
         forecastEl.classList.remove("hide");
 
 	} catch (err) {
-		// TODO: Replace this with a proper Bootstrap Alert component
-		alert(err);
+		// alert(err);
+
+        //Skriv i DOM vad för error det blir samt att det är rött
+        alertEl.innerText = err;
+		alertEl.className = "alert alert-danger";
 	};
 });
