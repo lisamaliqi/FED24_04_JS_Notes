@@ -177,7 +177,7 @@ formCreateTodoEl.addEventListener("submit", async (e) => {
 // Get all todos lists and listen for clicks
 document.querySelectorAll("ul.todos").forEach((listEl) => {
 	// Listen for click-events on each todos list
-	listEl.addEventListener("click", (e) => {
+	listEl.addEventListener("click", async (e) => {
 		console.log("You clicked on either the whole list, or one of its children", e.target);
 
 		if (e.target.tagName === "SPAN") {
@@ -208,12 +208,25 @@ document.querySelectorAll("ul.todos").forEach((listEl) => {
 
 			// Using filter to get all todos that are NOT matching the
 			// id of the todo we want to remove
-			todos = todos.filter((todo) => {
-				return todo.id !== clickedTodoId;
+			// todos = todos.filter((todo) => {
+			// 		return todo.id !== clickedTodoId;
+			//  });
+
+				// DELETE todo från API
+			const res = await fetch("http://localhost:3001/todos/" + clickedTodoId, {
+				method: "DELETE",
 			});
 
+			// Kolla så att allt är okej
+			if (!res.ok) {
+				alert("Could not delete todo! 😇");
+				console.log("Could not delete todo:", res);
+				return;
+			};
+
 			// Render updated todos
-			renderTodos();
+			// renderTodos();
+			getAndRenderTodos();
 		};
 	});
 });
