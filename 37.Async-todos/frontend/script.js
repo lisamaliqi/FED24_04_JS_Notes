@@ -10,6 +10,15 @@
  * Skriv funktionen `getAndRenderTodos()` som kallar på `fetchTodos()`, väntar på den
  * och tar datan och skriver över `todos`. Därefter kallar den på `renderTodos()`.
  *
+ * STEG 3.
+ * Ändra i click-handlern så att när man klickar på en knapp så skickas det en
+ * DELETE-request till `http://localhost:3001/todos/<id>`, väntar på svaret och
+ * därefter (om den lyckades) kallar på `getAndRenderTodos()`.
+ *
+ * STEG 4.
+ * Gör en PATCH när man togglar en todo. Skicka med vad `completed` ska ha för
+ * nytt värde.
+ *
  */
 // Get references to DOM elements
 const todolistEl = document.querySelector("#todolist");
