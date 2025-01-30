@@ -196,11 +196,26 @@ document.querySelectorAll("ul.todos").forEach((listEl) => {
 				return;
 			};
 
-			// Set completed to true on the found todo
-			clickedTodo.completed = !clickedTodo.completed;
+			// PATCH todo in till API
+			const res = await fetch("http://localhost:3001/todos/" + clickedTodoId, {
+				method: "PATCH",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					completed: !clickedTodo.completed,
+				}),
+			});
 
-			// Re-render todos so the DOM reflects the current truth
-			renderTodos();
+			// Kolla så att allt är okej
+			if (!res.ok) {
+				alert("Could not update todo! 🤨");
+				console.log("Could not update todo:", res);
+				return;
+			}
+
+			// Rendera uppdaterad todo
+			getAndRenderTodos();
 
 		} else if (e.target.tagName === "BUTTON") {
 			// User clicked on a button, get the todo id from closest `li`
