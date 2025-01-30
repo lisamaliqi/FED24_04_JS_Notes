@@ -48,6 +48,78 @@ const fetchTodos = async () => {
 	return data;
 };
 
+
+/**
+ * Create a new todo in the API
+ */
+const createTodo = async(newTodo) => {
+	// PPOST todo som användare skickar in till API
+	const res = await fetch("http://localhost:3001/todos", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify(newTodo),
+	});
+
+	// Kolla så att allt gick okej
+	if (!res.ok) {
+		alert("Could not create todo! 🥺");
+		console.log("Could not create todo:", res);
+		return;
+	};
+
+	return res;
+};
+
+
+/**
+ * Update todo in the API
+ */
+const updateTodo = async(id, data) => {
+	// PATCH todo in till API
+	const res = await fetch("http://localhost:3001/todos/" + clickedTodoId, {
+		method: "PATCH",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			completed: !clickedTodo.completed,
+		}),
+	});
+
+	// Kolla så att allt är okej
+	if (!res.ok) {
+		alert("Could not update todo! 🤨");
+		console.log("Could not update todo:", res);
+		return;
+	};
+
+	return res;
+};
+
+
+/**
+ * DELETE todo from API
+ */
+const deleteTodo = async (id) => {
+	// DELETE todo från API
+	const res = await fetch("http://localhost:3001/todos/" + clickedTodoId, {
+		method: "DELETE",
+	});
+
+	// Kolla så att allt är okej
+	if (!res.ok) {
+		alert("Could not delete todo! 😇");
+		console.log("Could not delete todo:", res);
+		return;
+	};
+	
+	return res;
+};
+
+
+
 /**
  * Invokes `fetchTodos`, updates our local copy `todos` and then
  * invokes `renderTodos`
@@ -141,26 +213,8 @@ formCreateTodoEl.addEventListener("submit", async (e) => {
 		completed: false,
 	};
 
-
-	// // Add it to the todos-array
-	// todos.push(newTodo);
-
-
-	// PPOST todo som användare skickar in till API
-	const res = await fetch("http://localhost:3001/todos", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(newTodo),
-	});
-
-	// Kolla så att allt gick okej
-	if (!res.ok) {
-		alert("Could not create todo! 🥺");
-		console.log("Could not create todo:", res);
-		return;
-	};
+	// Kalla createTodo (POST) för att skapa en todo till oss
+	await createTodo(newTodo);
 
 	// // Render a representation of the updated todos-array
 	// renderTodos();
@@ -196,23 +250,10 @@ document.querySelectorAll("ul.todos").forEach((listEl) => {
 				return;
 			};
 
-			// PATCH todo in till API
-			const res = await fetch("http://localhost:3001/todos/" + clickedTodoId, {
-				method: "PATCH",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					completed: !clickedTodo.completed,
-				}),
+			// Kalla updateTodo (PATCH) för att uppdatera todo i API
+			await updateTodo(clickedTodoId, {
+				completed: !clickedTodo.completed,
 			});
-
-			// Kolla så att allt är okej
-			if (!res.ok) {
-				alert("Could not update todo! 🤨");
-				console.log("Could not update todo:", res);
-				return;
-			}
 
 			// Rendera uppdaterad todo
 			getAndRenderTodos();
@@ -227,17 +268,9 @@ document.querySelectorAll("ul.todos").forEach((listEl) => {
 			// 		return todo.id !== clickedTodoId;
 			//  });
 
-				// DELETE todo från API
-			const res = await fetch("http://localhost:3001/todos/" + clickedTodoId, {
-				method: "DELETE",
-			});
-
-			// Kolla så att allt är okej
-			if (!res.ok) {
-				alert("Could not delete todo! 😇");
-				console.log("Could not delete todo:", res);
-				return;
-			};
+		
+			// Kalla på deleteTodo för att radera (DELETE) todo från API
+			await deleteTodo(clickedTodoId);
 
 			// Render updated todos
 			// renderTodos();
