@@ -83,6 +83,9 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 	};
 
 	try {
+        // Visa loading spinner
+		spinnerEl.classList.remove("hide");
+
         // Få ut vädret för staden användaren skriver in
 		console.log(`Search for city "${city}"`);
 		const data = await getCurrentWeather(city);
@@ -100,4 +103,7 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
         //Skriv i DOM vad för error det blir samt att det är rött
         showErrorAlert(err);
 	};
+
+    // Dölj loading spinner när man fått in datan och visar upp den
+	spinnerEl.classList.add("hide");
 });
