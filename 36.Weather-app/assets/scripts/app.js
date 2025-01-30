@@ -6,6 +6,22 @@ const alertEl = document.querySelector("#alert");
 const forecastEl = document.querySelector("#forecast");
 const spinnerEl = document.querySelector("#spinner");
 
+//ALERT functions
+const hideErrorAlert = () => {
+	alertEl.className = "hide";
+}
+const showErrorAlert = (msg) => {
+	alertEl.innerText = msg;
+	alertEl.className = "alert alert-danger";
+}
+const showInfoAlert = (msg) => {
+	alertEl.innerText = msg;
+	alertEl.className = "alert alert-info";
+}
+const showWarningAlert = (msg) => {
+	alertEl.innerText = msg;
+	alertEl.className = "alert alert-warning";
+}
 
 /**
  * Uppdatera UI med datan vi får från API när vi skriver in staden
@@ -53,7 +69,7 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
     // Göm tidigare väder som visats genom att lägga till hide klassen
 	forecastEl.classList.add("hide");
     // Göm alert diven så att den inte syns från start, utan syns endast när det blir något fel
-    alertEl.className = "hide";
+    hideErrorAlert();
     
     // Hämta ut innehållet som användaren skriver i formen 
 	const city = e.target.query.value.trim();
@@ -62,8 +78,7 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 		// alert("Too few characters in city, at least 3 is required!")
 
         //skriv i DOM att man ska skriva mer än 3 bokstäver
-        alertEl.innerText = "Please enter at least 3 characters";
-		alertEl.className = "alert alert-info";
+        showInfoAlert("Please enter at least 3 characters");
 		return;
 	};
 
@@ -83,7 +98,6 @@ document.querySelector("#search-form").addEventListener("submit", async (e) => {
 		// alert(err);
 
         //Skriv i DOM vad för error det blir samt att det är rött
-        alertEl.innerText = err;
-		alertEl.className = "alert alert-danger";
+        showErrorAlert(err);
 	};
 });
