@@ -29,6 +29,12 @@ const showWarningAlert = (msg) => {
  * @param data
  */
 const renderCurrentWeather = (data) => {
+    // Transformera varje weather till en listitem
+	const weatherConditions = data.weather.map((condition) => {
+		return `<li><img src="http://openweathermap.org/img/wn/${condition.icon}@2x.png" alt="${condition.main}" title="${condition.description}"></li>`;
+	});
+
+	// Skicka ut forecast till DOM
 	forecastEl.innerHTML = `
 		<img src="assets/images/forecast-banner.png" class="card-img-top">
 		<div class="card-body">
@@ -48,6 +54,9 @@ const renderCurrentWeather = (data) => {
 				<span id="windspeed">${data.wind.speed}</span>
 				m/s
 			</p>
+            <ul class="conditions">
+				${weatherConditions.join("")}
+			</ul>
 		</div>
 	`;
 };
